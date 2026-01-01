@@ -147,19 +147,22 @@ const Dashboard = ({ user, onLogout }) => {
   };
 
   const handleDeletePlan = async (planId) => {
-    // Remove from UI immediately for better UX
-    setPlans(plans.filter(p => p.id !== planId));
-    if (activePlanId === planId) {
-      setActivePlanId(null);
-      setView('generator');
-    }
-    
-    // Then delete from database
     try {
       const { deletePlan } = await import('../utils/mockData');
-      await deletePlan(planId, user?.uid);
+      const success = await deletePlan(planId, user?.uid);
+      
+      if (success) {
+        // Only remove from UI if database delete succeeded
+        setPlans(plans.filter(p => p.id !== planId));
+        if (activePlanId === planId) {
+          setActivePlanId(null);
+          setView('generator');
+        }
+      } else {
+        console.error('Failed to delete plan from database');
+      }
     } catch (error) {
-      console.error('Failed to delete from database:', error);
+      console.error('Error deleting plan:', error);
     }
   };
 

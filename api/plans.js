@@ -62,7 +62,11 @@ export default async function handler(req, res) {
   }
   
   else if (req.method === 'DELETE') {
+    console.log('🗑️ DELETE request received');
+    console.log('📋 Query params:', req.query);
+    
     if (!planId) {
+      console.error('❌ No planId provided');
       return res.status(400).json({ error: 'Plan ID required' });
     }
     
