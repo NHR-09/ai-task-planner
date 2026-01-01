@@ -32,7 +32,9 @@ export default async function handler(req, res) {
       
       const plans = [];
       snapshot.forEach(doc => {
-        plans.push({ id: doc.id, ...doc.data() });
+        const planData = { id: doc.id, ...doc.data() };
+        console.log('📋 Found plan with ID:', doc.id, 'Goal:', planData.goal);
+        plans.push(planData);
       });
       
       console.log('✅ Found', plans.length, 'plans in Firestore');
