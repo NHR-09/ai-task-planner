@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.headline {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: none; /* Removed border as requested */
+  backdrop-filter: blur(20px);
+}
+
+.inputGroup {
+  margin-bottom: 2rem;
+}
+
+.textInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: #bb86fc;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.daysControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.daysControl label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.numberInput {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 80px;
+}
+
+.submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #bb86fc;
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(187, 134, 252, 0.3);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}

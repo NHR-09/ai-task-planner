@@ -1,0 +1,36 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #e5e7eb;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f3f4f6;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.demoSection {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.demoSection h2 {
+  margin-bottom: 1rem;
+  color: #f9fafb;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.progressText {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #4f46e5;
+}

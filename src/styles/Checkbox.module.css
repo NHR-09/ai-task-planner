@@ -1,0 +1,56 @@
+.checkboxWrapper input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+
+.checkboxWrapper *,
+.checkboxWrapper ::after,
+.checkboxWrapper ::before {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.checkboxWrapper {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+}
+
+.label svg {
+  vertical-align: middle;
+  transform: scale(0.6); /* Scaled down to fit better */
+}
+
+.path1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: .5s stroke-dashoffset ease-in-out;
+  opacity: 0;
+}
+
+.check:checked + .label svg g .path1 {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+/* Optional: Add hover effect to the rect */
+.label svg rect {
+  transition: stroke 0.3s ease;
+}
+
+.checkboxWrapper:hover .label svg rect {
+  stroke: #fff;
+}
