@@ -26,7 +26,7 @@ A modern, AI-powered task planning application built with React and Firebase. Cr
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone <[https://github.com/NHR-09/ai-task-planner]
    cd day-1
    ```
 
