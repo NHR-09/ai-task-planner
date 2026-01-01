@@ -53,8 +53,9 @@ export default async function handler(req, res) {
         createdAt: new Date()
       });
       
-      console.log('✅ Plan saved with ID:', docRef.id);
-      res.json({ id: docRef.id, ...planData });
+      console.log('✅ Plan saved with Firestore ID:', docRef.id);
+      // Return the plan with the correct Firestore ID
+      res.json({ ...planData, id: docRef.id });
     } catch (error) {
       console.error('❌ Error saving plan:', error);
       res.status(500).json({ error: 'Failed to save plan' });
