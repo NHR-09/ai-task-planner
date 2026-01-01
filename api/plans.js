@@ -72,7 +72,18 @@ export default async function handler(req, res) {
     
     try {
       console.log('🗑️ Deleting plan from Firestore:', planId);
-      await firestore.collection('plans').doc(planId).delete();
+      
+      // First check if document exists
+      const docRef = firestore.collection('plans').doc(planId);
+      const doc = await docRef.get();
+      
+      if (!doc.exists) {
+        console.error('❌ Document does not exist:', planId);
+        return res.status(404).json({ error: 'Plan not found' });
+      }
+      
+      console.log('📋 Document exists, deleting...');
+      await docRef.delete();
       console.log('✅ Plan deleted successfully');
       res.json({ success: true });
     } catch (error) {
