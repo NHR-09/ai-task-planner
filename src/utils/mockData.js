@@ -59,18 +59,22 @@ export const savePlan = async (plan, userId) => {
 
 export const deletePlan = async (planId, userId) => {
   try {
-    console.log('🗑️ Deleting plan:', planId);
+    console.log('🗑️ Deleting plan:', planId, 'for user:', userId);
     const response = await fetch(`/api/plans?userId=${userId}&planId=${planId}`, {
       method: 'DELETE'
     });
     
+    console.log('📡 Delete response status:', response.status);
+    
     if (!response.ok) {
-      console.error('❌ Failed to delete plan:', response.status);
-      throw new Error('Failed to delete plan');
+      const errorText = await response.text();
+      console.error('❌ Delete failed:', response.status, errorText);
+      return false;
     }
     
-    console.log('✅ Plan deleted successfully');
-    return true;
+    const result = await response.json();
+    console.log('✅ Delete result:', result);
+    return result.success;
   } catch (error) {
     console.error('❌ Error deleting plan:', error);
     return false;
