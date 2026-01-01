@@ -1,11 +1,27 @@
-const { db } = require('../../firebase-admin');
-const Groq = require('groq-sdk');
+import admin from 'firebase-admin';
+import Groq from 'groq-sdk';
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
+  });
+}
+
+const db = admin.firestore();
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
 export default async function handler(req, res) {
+  console.log('🚀 Generate plan API called');
+  console.log('📝 Request body:', req.body);
+  console.log('🔑 GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY);
+  
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
