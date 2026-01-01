@@ -62,7 +62,10 @@ const Dashboard = ({ user, onLogout }) => {
     setLoading(true);
     const { generatePlan } = await import('../utils/mockData');
     const newPlan = await generatePlan(goal, days, user?.uid);
-    newPlan.id = newPlan.id || Date.now().toString();
+    // Don't override the ID if it already exists from the API
+    if (!newPlan.id) {
+      newPlan.id = Date.now().toString();
+    }
     setGeneratedPlan(newPlan);
     setLoading(false);
   };

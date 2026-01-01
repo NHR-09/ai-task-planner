@@ -76,13 +76,32 @@ export default async function handler(req, res) {
     try {
       console.log('🗑️ Deleting plan from Firestore:', planId);
       
-      // First check if document exists
-      const docRef = firestore.collection('plans').doc(planId);
-      const doc = await docRef.get();
+      // Try to find document by ID first
+      let docRef = firestore.collection('plans').doc(planId);
+      let doc = await docRef.get();
       
       if (!doc.exists) {
-        console.error('❌ Document does not exist:', planId);
-        return res.status(404).json({ error: 'Plan not found' });
+        console.log('📋 Document not found by ID, searching by timestamp...');
+        // If not found, try to find by timestamp in the goal or other fields
+        const snapshot = await firestore.collection('plans')
+          .where('userId', '==', userId)
+          .get();
+        
+        let foundDoc = null;
+        snapshot.forEach(d => {
+          const data = d.data();
+          if (data.id === planId || (data.goal && data.goal.includes(planId))) {
+            foundDoc = d;
+          }
+        });
+        
+        if (foundDoc) {
+          docRef = foundDoc.ref;
+          console.log('✅ Found document by search:', foundDoc.id);
+        } else {
+          console.error('❌ Document does not exist:', planId);
+          return res.status(404).json({ error: 'Plan not found' });
+        }
       }
       
       console.log('📋 Document exists, deleting...');
